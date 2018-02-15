@@ -19,6 +19,24 @@
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
+/**
+ * * \brief Temporizador de baja resolucion
+ * @param milis milisegundos a temporizar
+ */
+void ret_milis( int milis ){
+	clock_t cuenta,	i;
+	clock_t t0, t1;
+
+	t0 = clock();
+	cuenta = milis * CLOCKS_PER_SEC / 1000;
+
+	for( i=0; i < cuenta; i++ ){
+		t1 = clock();
+		if( (t1 - t0) >=  cuenta )
+			break;
+	}
+	return;
+}
 
 /*==================[external functions definition]==========================*/
 void board_init(void)
@@ -74,11 +92,18 @@ void board_init(void)
 
 int8_t pulsadorSw1_get(void)
 {
+	if(GPIOC_PDIR & (1 << 3))					// esta pulsado
+		ret_milis(200);
+
 	return (GPIOC_PDIR & (1 << 3))?0:1;
 }
 
 int8_t pulsadorSw3_get(void)
 {
+	if(GPIOC_PDIR & (1 << 12))					// esta pulsado
+		ret_milis(200);
+
+
 	return (GPIOC_PDIR & (1 << 12))?0:1;
 }
 

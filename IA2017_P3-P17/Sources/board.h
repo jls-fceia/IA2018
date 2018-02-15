@@ -8,6 +8,7 @@
 #ifndef SOURCES_BOARD_H_
 #define SOURCES_BOARD_H_
 
+#include <time.h>
 #include "MKL46Z4.h"
 /*==================[cplusplus]==============================================*/
 #ifdef __cplusplus
@@ -48,6 +49,11 @@ int8_t pulsadorSw1_get(void);
  **/
 int8_t pulsadorSw3_get(void);
 
+/**
+ **	\brief Retardo calculado en milisegundos
+ **
+ **/
+void ret_milis( int milis );
 /*==================[cplusplus]==============================================*/
 #ifdef __cplusplus
 }
