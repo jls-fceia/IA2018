@@ -45,17 +45,6 @@ int usr_sec[100];
 enum estados estado_actual = INIT;
 enum estados proximo_estado= INIT;
 
-	/*
-	 * Retardo(): delay primitivo
-	 */
-void Retardo( int ciclos ){
-	int n;
-
-	for( n = 0; n < ciclos; n++ ){
-		;
-	}
-	return;
-}
 
 	/*
 	 * GenSec(): genera una secuencia aleatoria de encendido de LEDs, sumando uno al anterior
@@ -78,13 +67,13 @@ void RepSec(void){
 		switch( secuencia[k] ){
 		case 1:
 			LED_ROJO_ON;
-			Retardo( 1000 );
+			ret_milis( 1000 );
 			LED_ROJO_OFF;
 			break;
 
 		case 2:
 			LED_VERDE_ON;
-			Retardo( 1000 );
+			ret_milis( 1000 );
 			LED_VERDE_OFF;
 
 		default:
@@ -115,10 +104,10 @@ void Ganaste(void){
 	int n;
 	for( n = 0; n < 20; n++ ){
 		LED_ROJO_ON;
-		Retardo( 100 );
+		ret_milis( 100 );
 		LED_ROJO_OFF;
 		LED_VERDE_ON;
-		Retardo( 100 );
+		ret_milis( 100 );
 		LED_VERDE_OFF;
 	}
 	return;
@@ -202,7 +191,7 @@ int main(void)
     	case PERDISTE:
     		for( i = 0; i < 20; i++ ){
     			LED_ROJO_TOGGLE;
-    			Retardo( 1000 );
+    			ret_milis( 1000 );
     		}
     		proximo_estado = FIN;
     		break;

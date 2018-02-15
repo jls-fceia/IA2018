@@ -20,7 +20,7 @@
 
 /*==================[internal functions definition]==========================*/
 /**
- * * \brief Temporizador de baja resolucion
+ * * \brief Temporizador de baja resolucion (espera ocupada)
  * @param milis milisegundos a temporizar
  */
 void ret_milis( int milis ){
@@ -95,7 +95,7 @@ int8_t pulsadorSw1_get(void)
 	if(GPIOC_PDIR & (1 << 3))					// esta pulsado
 		ret_milis(200);
 
-	return (GPIOC_PDIR & (1 << 3))?0:1;
+	return (GPIOC_PDIR & (1 << 3))?0:1;			// sigue pulsado, elimina rebotes
 }
 
 int8_t pulsadorSw3_get(void)
