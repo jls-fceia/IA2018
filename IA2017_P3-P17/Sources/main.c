@@ -1,4 +1,8 @@
 	/**
+	 * \brief Simulador de juego "Simon says" con Maquina de estados finitos en FRDKL46Z
+	 */
+
+	/**
 	 * Informatica Aplicada - Ingenieria Electronica
 	 *            DSI - EIE - FCEIA
 	 *
@@ -6,9 +10,6 @@
 	 *                 2018
 	 */
 
-	/**
-	 * \brief Simulador de juego "Simon says" con Maquina de estados finitos en FRDKL46Z
-	 */
 #include <stdlib.h>
 #include "board.h"
 
