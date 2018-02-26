@@ -92,19 +92,12 @@ void board_init(void)
 
 int8_t pulsadorSw1_get(void)
 {
-	if(GPIOC_PDIR & (1 << 3))					// esta pulsado
-		ret_milis(200);
-
-	return (GPIOC_PDIR & (1 << 3))?0:1;			// sigue pulsado, elimina rebotes
+	return (GPIOC_PDIR & (1 << 3))?0:1;			// esta pulsado?
 }
 
 int8_t pulsadorSw3_get(void)
 {
-	if(GPIOC_PDIR & (1 << 12))					// esta pulsado
-		ret_milis(200);
-
-
-	return (GPIOC_PDIR & (1 << 12))?0:1;
+		return (GPIOC_PDIR & (1 << 12))?0:1;		// esta pulsado?
 }
 
 /*==================[end of file]============================================*/

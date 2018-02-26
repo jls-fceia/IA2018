@@ -16,8 +16,40 @@
 #define LED1 1
 #define LED2 2
 
+#define T_ANTIRREBOTES 250				// retardo para absorber rebotes
+
 
 static int i = 0, sec = 0, usec;
+
+	/**
+	 * /brief Lee pulsadores con retardo antirrebotes
+	 * @param nPuls: pulsador a leer (0,1)
+	 * @return estado del pulsador 0: abierto, 1: pulsado
+	 */
+int8_t LeerPulsador(int nPuls ){
+
+	switch(nPuls){
+	case 1:
+		if( pulsadorSw1_get() == 0 )
+			return 0;
+
+		ret_milis(T_ANTIRREBOTES);
+		return pulsadorSw1_get();
+
+	case 2:
+		if( pulsadorSw3_get() == 0 )
+			return 0;
+
+		ret_milis(T_ANTIRREBOTES);
+		return pulsadorSw3_get();
+
+	default:
+		return 0;
+
+
+	}
+
+}
 
 	/**
 	 * <Estados y eventos de la MEF
@@ -59,13 +91,13 @@ void RepSec(void){
 	int k;
 	for( k = 0; k < 100; k++ )
 		switch( secuencia[k] ){
-		case 1:
+		case LED1:
 			LED_ROJO_ON;
 			ret_milis( 1000 );
 			LED_ROJO_OFF;
 			break;
 
-		case 2:
+		case LED2:
 			LED_VERDE_ON;
 			ret_milis( 1000 );
 			LED_VERDE_OFF;
@@ -162,14 +194,14 @@ int main(void)
     			/*
     			 * Leer pulsadores
     			 */
-    			tp1 = pulsadorSw1_get();
-    			tp2 = pulsadorSw3_get();
+    			tp1 = LeerPulsador(1);
+    			tp2 = LeerPulsador(2);
 
     			/**
     			 * < con ambos pulsadores se termina el juego
     			 */
     			if( tp1 == 1 && tp2 == 1)
-    				return;
+    				return 0;
 
     			if( tp1 != 0 && tp2 == 0)
     				usr_sec[ usec++ ] = LED1;
